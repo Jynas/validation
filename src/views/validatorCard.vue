@@ -16,7 +16,7 @@
         alt=""
       />
       <p
-        v-if="cardNumber.replace(/\s/g, '').length > 0 && getCardType == false"
+        v-if="cardNumber.replace(/\s/g, '').length > 0 && getCardType !== true"
       >
         Данный тип карты не поддерживается
       </p>
@@ -32,6 +32,7 @@
           autocomplete="off"
           oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\s/g,'').replace(/(.{4})/g,'$1 ')"
           maxlength="19"
+          data-testid="inputCardNumber"
         />
       </div>
       <div>
@@ -103,6 +104,9 @@ export default {
   },
   methods: {},
   computed: {
+    // error() {
+    //   return this.cardNumber === 16 ? "Введите не больше 16 цифр" : "";
+    // },
     getCardType() {
       let number = this.cardNumber;
       let imgClass = this.isActive;
